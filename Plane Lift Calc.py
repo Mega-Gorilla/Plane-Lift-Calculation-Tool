@@ -7,7 +7,7 @@ import numpy as np
 #defalut value
 Air_density = 1.2250 #kg/m^3 空気比質量空気密度
 wing_size = 12 #m2 翼面積
-Relative_speed = range(100) #m/s 流速
+Relative_speed = list(range(1,101)) #m/s 流速
 Angle_of_attack = 2 #迎え角 2は2°下に傾いてる。
 
 print("値を入力してください。/ Please enter a value.")
@@ -36,12 +36,12 @@ CD = 0.04
 #Ｄ＝１４（Ｎ : kg.m/s2）
 
 #calc L
-L = (1/2)*(Air_density*(Relative_speed**2)*wing_size*CL) #(N)
+#L = (1/2)*(Air_density*(Relative_speed**2)*wing_size*CL) #(N)
 #calc D
-D = (1/2)*(Air_density*(Relative_speed**2)*wing_size*CD) #(N)
-P = L * Relative_speed
-print("揚力L=",L,"N  抗力D=",D,"N")
-print("必要動力P=",P,"W")
+#D = (1/2)*(Air_density*(Relative_speed**2)*wing_size*CD) #(N)
+#P = L * Relative_speed
+#print("揚力L=",L,"N  抗力D=",D,"N")
+#print("必要動力P=",P,"W")
 
 L = []
 D = []
@@ -51,7 +51,7 @@ for speed in Relative_speed :
     D.append((1/2)*(Air_density*(speed**2)*wing_size*CD))
     P.append((1/2)*(Air_density*(speed**2)*wing_size*CL)*speed)
 
-XA = np.linsace(L)
-XB = np.linsace(D)
-Y = np.linsace(Relative_speed)
-plt.plot(XA,Y)
+plt.plot(Relative_speed,L,label="揚力/Lifting Power")
+plt.plot(Relative_speed,D,label="抗力/Drag")
+plt.legend()#凡例の表示
+plt.show()
