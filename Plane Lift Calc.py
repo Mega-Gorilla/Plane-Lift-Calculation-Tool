@@ -1,6 +1,7 @@
 
 #import
 import matplotlib.pyplot as plt
+import pylab
 import math 
 import numpy as np
 
@@ -9,6 +10,12 @@ Air_density = 1.2250 #kg/m^3 空気比質量空気密度
 wing_size = 12 #m2 翼面積
 Relative_speed = list(range(1,101)) #m/s 流速
 Angle_of_attack = 2 #迎え角 2は2°下に傾いてる。
+
+#クリック場所の数値取得
+def onclick(event):
+    print('clocked point X=%f, Y=%f' %(
+     event.xdata, event.ydata))
+
 
 print("値を入力してください。/ Please enter a value.")
 print("気圧 日本周辺平均 1013hpa/ Barometric pressure Japan area average 1013hpa" )
@@ -50,6 +57,26 @@ for speed in Relative_speed :
     L.append((1/2)*(Air_density*(speed**2)*wing_size*CL))
     D.append((1/2)*(Air_density*(speed**2)*wing_size*CD))
     P.append((1/2)*(Air_density*(speed**2)*wing_size*CL)*speed)
+
+# 新規のウィンドウを描画
+fig = plt.figure()
+ax1 = fig.add_subplot(1,2,1)
+ax2 = fig.add_subplot(1,2,2)
+ax1.plot(Relative_speed,L,label='Lifting Power[N]')
+ax1.plot(Relative_speed,D,label='Drag[N]')
+ax2.plot(Relative_speed,P,label='Power[W]')
+ax1.set_title('Lifting & Drag')
+ax2.set_title('Required Power')
+ax1.set_xlabel('Speed(m/s)')
+ax1.set_ylabel('Lifting / Drag (N)')
+ax2.set_xlabel('Speed(m/s)')
+ax2.set_ylabel('Required Power[W]')
+ax1.grid(True) #罫線の表示
+ax2.grid(True)
+ax1.legend()#凡例の表示
+ax2.legend()
+
+"""
 plt.subplot(1,2,1)
 plt.plot(Relative_speed,L,label='Lifting Power[N]')
 plt.plot(Relative_speed,D,label='Drag[N]')
@@ -65,4 +92,7 @@ plt.xlabel('Speed(m/s)')
 plt.title('Required Power')
 plt.ylabel('Required Power[W]')
 plt.grid(True) #罫線の表示
-plt.show()
+"""
+
+cid = fig.canvas.mpl_connect('button_press_event', onclick)
+plt.show()  
