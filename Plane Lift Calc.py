@@ -51,7 +51,11 @@ for speed in Relative_speed :
     D.append((1/2)*(Air_density*(speed**2)*wing_size*CD))
     P.append((1/2)*(Air_density*(speed**2)*wing_size*CL)*speed)
 
-plt.plot(Relative_speed,L,label="揚力/Lifting Power")
-plt.plot(Relative_speed,D,label="抗力/Drag")
+plt.plot(Relative_speed,L,label='揚力/Lifting Power')
+plt.plot(Relative_speed,D,label='抗力/Drag')
+plt.title('Lift Calculation')
+plt.xlabel('Speed(m/s)')
+plt.ylabel('Lifting - Drag Power (N)')
+plt.grid(True) #罫線の表示
 plt.legend()#凡例の表示
 plt.show()
