@@ -50,12 +50,19 @@ for speed in Relative_speed :
     L.append((1/2)*(Air_density*(speed**2)*wing_size*CL))
     D.append((1/2)*(Air_density*(speed**2)*wing_size*CD))
     P.append((1/2)*(Air_density*(speed**2)*wing_size*CL)*speed)
-
-plt.plot(Relative_speed,L,label='Lifting Power')
-plt.plot(Relative_speed,D,label='Drag')
-plt.title('Lift Calculation')
+plt.subplot(1,2,1)
+plt.plot(Relative_speed,L,label='Lifting Power[N]')
+plt.plot(Relative_speed,D,label='Drag[N]')
+plt.title('Lifting & Drag')
 plt.xlabel('Speed(m/s)')
-plt.ylabel('Lifting / Drag Power (N)')
+plt.ylabel('Lifting / Drag (N)')
 plt.grid(True) #罫線の表示
 plt.legend()#凡例の表示
+
+plt.subplot(1,2,2)
+plt.plot(Relative_speed,P,label='Power[W]')
+plt.xlabel('Speed(m/s)')
+plt.title('Required Power')
+plt.ylabel('Required Power[W]')
+plt.grid(True) #罫線の表示
 plt.show()
